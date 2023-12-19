@@ -3,32 +3,12 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Reflection;
 using System.Text;
-using System.Management;
 class Program {
   private static Random random = new Random();
   
   static void print(string text) {
     Console.WriteLine(text);
   }
-  public static void CreateWindowsUserProfile(string username, string password){
-        ManagementObject newAccount = new ManagementClass("Win32_UserAccount").CreateInstance();    
-        if (newAccount != null){
-            newAccount["Name"] = username;
-            newAccount["Password"] = password;
-            newAccount["AccountType"] = 512; // User account type
-            try {
-                newAccount.Put();
-                Console.WriteLine($"User profile for {username} created successfully.");
-            }
-            catch (ManagementException e){
-                Console.WriteLine($"Failed to create user profile: {e.Message}");
-            }
-        }
-        else{
-            Console.WriteLine("Failed to create user profile.");
-        }
-    }
-
 
   public static string GenerateRandomString(int length){
       const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
